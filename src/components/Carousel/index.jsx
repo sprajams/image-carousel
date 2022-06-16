@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-
+import Image from "../Image";
 function Carousel() {
   const [img, setImg] = useState([]);
   useEffect(() => {
@@ -18,14 +18,18 @@ function Carousel() {
       });
   }, []);
 
+  console.log(img);
   return (
     <div>
       <div>img img img</div>
-      {img.length > 0
-        ? img.map((x) => {
-            return <img src={x} alt="random"></img>;
+      {/* {img.length > 0
+        ? img.map((x, i) => {
+            return <img src={x} alt="random" key={i}></img>;
           })
-        : null}
+        : null} */}
+      <div>
+        <Image image={img} />
+      </div>
     </div>
   );
 }
