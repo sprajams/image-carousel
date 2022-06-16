@@ -2,41 +2,45 @@ import clsx from "clsx";
 import { useState, useEffect, useCallback } from "react";
 import styles from "./styles.module.scss";
 
-function Image({ image }) {
-  const [imgIndex, setImgIndex] = useState(0);
+function Image({ image, title }) {
+  const [dataIndex, setDataIndex] = useState(0);
 
   const next = useCallback(() => {
-    if (imgIndex < image.length - 1) {
-      setImgIndex((curr) => curr + 1);
+    if (dataIndex < image.length - 1) {
+      setDataIndex((curr) => curr + 1);
     }
-  }, [image.length, imgIndex]);
+  }, [image.length, dataIndex]);
 
   const prev = () => {
-    if (imgIndex > 0) {
-      setImgIndex((curr) => curr - 1);
+    if (dataIndex > 0) {
+      setDataIndex((curr) => curr - 1);
     }
   };
 
   useEffect(() => {
     const timer = setInterval(() => {
       next();
-    }, 3000);
+    }, 5000);
     return () => {
       clearInterval(timer);
     };
   }, [next]);
 
   return (
-    <div className={styles.outer}>
-      <button onClick={prev} className={clsx(styles.btn)}>
-        ◀︎
-      </button>
-      <div className={styles.imgWrap}>
-        <img src={image[imgIndex]} alt="cutie"></img>
+    <div>
+      <div className={styles.outer}>
+        <button onClick={prev} className={clsx(styles.btn)}>
+          ◀︎
+        </button>
+        <div className={styles.imgWrap}>
+          <img src={image[dataIndex]} alt="cutie"></img>
+        </div>
+        <button onClick={next} className={clsx(styles.btn, styles.btnLeft)}>
+          ▶︎
+        </button>
       </div>
-      <button onClick={next} className={clsx(styles.btn, styles.btnLeft)}>
-        ▶︎
-      </button>
+
+      <div className={styles.caption}>"{title[dataIndex]}"</div>
     </div>
   );
 }

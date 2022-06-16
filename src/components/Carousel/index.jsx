@@ -2,6 +2,8 @@ import { useEffect, useState } from "react";
 import Image from "../Image";
 function Carousel() {
   const [img, setImg] = useState([]);
+  const [title, setTitle] = useState([]);
+
   useEffect(() => {
     fetch("https://www.reddit.com/r/aww/top/.json?t=all")
       .then((res) => res.json())
@@ -10,19 +12,21 @@ function Carousel() {
         // TODO: REFACTOR WITH REGEX
         const allDataObj = data.data.children;
         for (let i = 0; i < allDataObj.length; i++) {
-          if (allDataObj[i].data.url_overridden_by_dest.slice(-3) === "jpg")
+          if (allDataObj[i].data.url_overridden_by_dest.slice(-3) === "jpg") {
             setImg((curr) => {
               return [...curr, allDataObj[i].data.url_overridden_by_dest];
             });
+            setTitle((curr) => {
+              return [...curr, allDataObj[i].data.title];
+            });
+          }
         }
       });
   }, []);
-
-  console.log(img);
   return (
     <div>
       <div>
-        <Image image={img} />
+        <Image image={img} title={title} />
       </div>
     </div>
   );
