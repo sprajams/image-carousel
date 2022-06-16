@@ -1,18 +1,19 @@
+import clsx from "clsx";
 import { useState, useEffect, useCallback } from "react";
 import styles from "./styles.module.scss";
 
 function Image({ image }) {
-  const [imgNum, setImgNum] = useState(0);
+  const [imgIndex, setImgIndex] = useState(0);
 
   const next = useCallback(() => {
-    if (imgNum < image.length - 1) {
-      setImgNum((curr) => curr + 1);
+    if (imgIndex < image.length - 1) {
+      setImgIndex((curr) => curr + 1);
     }
-  }, [image.length, imgNum]);
+  }, [image.length, imgIndex]);
 
   const prev = () => {
-    if (imgNum > 0) {
-      setImgNum((curr) => curr - 1);
+    if (imgIndex > 0) {
+      setImgIndex((curr) => curr - 1);
     }
   };
 
@@ -26,12 +27,16 @@ function Image({ image }) {
   }, [next]);
 
   return (
-    <div>
-      <button onClick={prev}>back</button>
+    <div className={styles.outer}>
+      <button onClick={prev} className={clsx(styles.btn)}>
+        ◀︎
+      </button>
       <div className={styles.imgWrap}>
-        <img src={image[imgNum]} alt="cutie"></img>
+        <img src={image[imgIndex]} alt="cutie"></img>
       </div>
-      <button onClick={next}>next</button>
+      <button onClick={next} className={clsx(styles.btn, styles.btnLeft)}>
+        ▶︎
+      </button>
     </div>
   );
 }
