@@ -2,12 +2,14 @@ import clsx from "clsx";
 import { useState, useEffect, useCallback } from "react";
 import styles from "./styles.module.scss";
 
-function Image({ image, title }) {
+function Image({ image, title, author }) {
   const [dataIndex, setDataIndex] = useState(0);
 
   const next = useCallback(() => {
     if (dataIndex < image.length - 1) {
       setDataIndex((curr) => curr + 1);
+    } else if (dataIndex === image.length - 1) {
+      setDataIndex(0);
     }
   }, [image.length, dataIndex]);
 
@@ -20,7 +22,7 @@ function Image({ image, title }) {
   useEffect(() => {
     const timer = setInterval(() => {
       next();
-    }, 5000);
+    }, 3000);
     return () => {
       clearInterval(timer);
     };
@@ -41,6 +43,7 @@ function Image({ image, title }) {
       </div>
 
       <div className={styles.caption}>"{title[dataIndex]}"</div>
+      <div className={styles.author}>- {author[dataIndex]}</div>
     </div>
   );
 }

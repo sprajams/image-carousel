@@ -42,9 +42,12 @@
 .caption {
   display: flex;
   width: 350px;
-  padding: 10px 20px;
+  padding: 10px 20px 0;
   @media (min-width: 768px) {
     width: 600px;
     position: relative;
   }
+}
+.author {
+  text-align: right;
 }

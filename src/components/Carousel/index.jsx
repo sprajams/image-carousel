@@ -3,6 +3,7 @@ import Image from "../Image";
 function Carousel() {
   const [img, setImg] = useState([]);
   const [title, setTitle] = useState([]);
+  const [author, setAuthor] = useState([]);
 
   useEffect(() => {
     fetch("https://www.reddit.com/r/aww/top/.json?t=all")
@@ -11,6 +12,7 @@ function Carousel() {
         // filter out urls that return an img from an array of objects
         // TODO: REFACTOR WITH REGEX
         const allDataObj = data.data.children;
+        console.log(allDataObj[4]);
         for (let i = 0; i < allDataObj.length; i++) {
           if (allDataObj[i].data.url_overridden_by_dest.slice(-3) === "jpg") {
             setImg((curr) => {
@@ -19,6 +21,9 @@ function Carousel() {
             setTitle((curr) => {
               return [...curr, allDataObj[i].data.title];
             });
+            setAuthor((curr) => {
+              return [...curr, allDataObj[i].data.author];
+            });
           }
         }
       });
@@ -26,7 +31,7 @@ function Carousel() {
   return (
     <div>
       <div>
-        <Image image={img} title={title} />
+        <Image image={img} title={title} author={author} />
       </div>
     </div>
   );
