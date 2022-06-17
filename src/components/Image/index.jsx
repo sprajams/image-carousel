@@ -41,9 +41,10 @@ function Image({ image, title, author }) {
           ▶︎
         </button>
       </div>
-
-      <div className={styles.caption}>"{title[dataIndex]}"</div>
-      <div className={styles.author}>- {author[dataIndex]}</div>
+      <div className={styles.capWrap}>
+        <div className={styles.caption}>"{title[dataIndex]}"</div>
+        <div className={styles.author}>- {author[dataIndex]}</div>
+      </div>
     </div>
   );
 }

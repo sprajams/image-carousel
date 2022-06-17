@@ -39,12 +39,19 @@
 .btnLeft {
   right: 0;
 }
-.caption {
-  display: flex;
+
+.capWrap {
   width: 350px;
-  padding: 10px 20px 0;
+  padding: 20px;
+  height: 150px;
   @media (min-width: 768px) {
     width: 600px;
+    height: 110px;
+  }
+}
+.caption {
+  display: flex;
+  @media (min-width: 768px) {
     position: relative;
   }
 }
